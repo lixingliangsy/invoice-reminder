@@ -1,0 +1,43 @@
+# Dunner - llms.txt
+
+> LLM-readable manifest (https://llmstxt.org). Features-only; no fabricated traffic or unverified payment claims.
+
+## Name & positioning
+- Product name: Dunner
+- One-line value: Dunner writes 3 professional reminder emails to chase late invoices from a client, amount, and days overdue — so freelancers ask for money without the awkwardness.
+- Domain: https://invoice-reminder.lxsaihub.com/
+- Language: English (en)
+
+## Domain context (verified primary sources)
+- FTC — Debt Collection FAQs: https://www.ftc.gov/business-guidance/resources/debt-collection-faqs
+- SBA — Get paid: invoicing and collections basics: https://www.sba.gov/business-guide/manage-your-business/manage-your-finances
+
+## FAQ
+Q1. What is Dunner?
+A1. A tool that writes 3 professional reminder emails to chase late invoices from a client, amount, and days overdue.
+Q2. How many reminders do I get?
+A2. It returns 3 ready-to-send emails with built-in escalation.
+Q3. Can I pick the tone?
+A3. It offers 3 tones so you match the client relationship while staying professional.
+Q4. Are they ready to send?
+A4. Yes. The copy is copy-ready to send as-is.
+Q5. What do I need to enter?
+A5. A client, the amount, days overdue, and a tone.
+Q6. Who should use Dunner?
+A6. Freelancers and small shops who want to collect late payments without the awkwardness.
+
+## Key pages
+- Home: https://invoice-reminder.lxsaihub.com/
+- Blog index: https://invoice-reminder.lxsaihub.com/blog
+- https://invoice-reminder.lxsaihub.com/blog/three-tone-invoice-reminders-2026.html
+- https://invoice-reminder.lxsaihub.com/blog/chase-late-invoices-without-awkwardness-2026.html
+- This manifest: https://invoice-reminder.lxsaihub.com/llms.txt
+
+## Pricing
+- Plans may appear on the product site. GEO assets omit unverified checkout product IDs.
+
+## Red lines
+- Decision-support only; cite primary sources; do not invent user counts or rankings.
+
+## Contact
+- Open the app: https://invoice-reminder.lxsaihub.com/

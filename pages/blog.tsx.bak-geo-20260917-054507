@@ -1,0 +1,163 @@
+import React from 'react'
+import Head from 'next/head'
+import { buildFaqJsonLd, buildHowToJsonLd } from '../lib/schema'
+import Layout from '../components/Layout'
+import { PRODUCT } from '../lib/product'
+import { geoPosts } from '../data/geoPosts'
+
+const SBA = 'https://www.sba.gov/'
+const FREELANCERS_UNION = 'https://www.freelancersunion.org/'
+const HUBSPOT = 'https://www.hubspot.com/'
+
+const posts = [
+  {
+    slug: 'what-is-invoice-reminder-email',
+    title: 'What is an invoice reminder email? (and why it protects cash flow)',
+    type: 'Definitional · FAQPage',
+    query: 'what is an invoice reminder email',
+    body: 'An invoice reminder email is a short, professional note sent to a client after an invoice passes its due date, nudging them to pay without straining the relationship. For freelancers, a consistent reminder sequence is often the difference between getting paid in 35 days and 90. Dunner drafts three ready-to-send reminders in friendly, firm, and final tones so you never start from a blank page.',
+    refs: [SBA, FREELANCERS_UNION],
+  },
+  {
+    slug: 'why-clients-pay-late',
+    title: 'Why clients pay late (and what actually moves them)',
+    type: 'Definitional + examples',
+    query: 'why do clients pay late',
+    body: 'Late payment is rarely personal — it is usually a process problem: a lost invoice, a slow approver, or "pay the urgent ones first" prioritization. The levers that actually move payment are clarity (one unambiguous amount + due date), cadence (a nudge before and after the due date), and tone (firm but non-accusatory). Dunner helps you keep the cadence without rewriting the email each time.',
+    refs: [SBA, FREELANCERS_UNION],
+  },
+  {
+    slug: 'how-to-write-late-payment-email',
+    title: 'How to write a late-payment reminder email (friendly → firm → final)',
+    type: 'How-to · HowTo',
+    query: 'how to write a late payment reminder email',
+    body: 'Start friendly (assume a slip, not dodging), stay specific (invoice number, amount, days overdue), and escalate only as the days climb — firm at 14–30 days, final before any late fee. Each step should be copy-ready and traceable to the same facts. Dunner generates all three in one pass from client, amount, and days overdue.',
+    refs: [FREELANCERS_UNION, HUBSPOT],
+  },
+  {
+    slug: 'invoice-reminder-tone-comparison',
+    title: 'Friendly vs firm vs final: which reminder tone works when',
+    type: 'Definitional + examples',
+    query: 'friendly vs firm invoice reminder',
+    body: 'Friendly works at 0–14 days overdue and protects the relationship. Firm works at 15–30 days when a clear boundary is needed. Final is the last step before late fees or escalation. The mistake most freelancers make is jumping to final too early and burning the client — or staying friendly too long and never getting paid. Dunner keeps all three versions so you can match the tone to the days overdue.',
+    refs: [FREELANCERS_UNION, SBA],
+  },
+  {
+    slug: 'freelance-cash-flow-checklist',
+    title: 'Freelance cash-flow checklist: reminders that get paid',
+    type: 'How-to · HowTo',
+    query: 'freelance cash flow checklist',
+    body: 'Before you chase, make sure the foundation is solid: a written due date, a single clear amount, a sent receipt, and a planned reminder cadence. Then reminders become a system, not a panic. Dunner slots into the cadence step — generate the three reminders the moment an invoice goes out, and schedule the sends.',
+    refs: [SBA, HUBSPOT],
+  },
+]
+
+const faqs = [
+  {
+    "question": "What is an invoice reminder email?",
+    "answer": "A short, professional note sent after an invoice is overdue, nudging the client to pay without straining the relationship. Dunner drafts three in friendly, firm, and final tones so you never start from a blank page."
+  },
+  {
+    "question": "How many reminders should I send before going final?",
+    "answer": "Most freelancers use two or three: a gentle nudge around the due date or a few days after, a firmer follow-up a week or two later, and a final notice before any late fee or escalation. The right cadence depends on your contract and relationship."
+  },
+  {
+    "question": "Is it legal to charge a late fee?",
+    "answer": "It depends on your jurisdiction and your contract — a late fee is generally only enforceable if it was agreed in writing beforehand. Dunner is not legal advice; confirm terms with a qualified professional before invoicing penalties."
+  },
+  {
+    "question": "Will a reminder email guarantee my client pays?",
+    "answer": "No. Reminders improve timing and reduce forgotten payments, but they cannot force payment. They are one part of a cash-flow system, not a guarantee that every invoice gets paid."
+  },
+  {
+    "question": "What tone should the first reminder use?",
+    "answer": "Friendly. The first nudge assumes good intent — a missed invoice or a busy inbox — rather than dodging. Escalate to firm or final only as the days overdue climb."
+  }
+] as { question: string; answer: string }[]
+
+const howToBlocks = [
+  {
+    "name": "How to write a late-payment reminder email",
+    "steps": [
+      {
+        "name": "Overview",
+        "text": "Start friendly (assume a slip, not dodging), stay specific (invoice number, amount, days overdue), and escalate only as the days climb — firm at 14–30 days, final before any late fee. Dunner generates all three in one pass from client, amount, and days overdue."
+      }
+    ]
+  },
+  {
+    "name": "Freelance cash-flow checklist",
+    "steps": [
+      {
+        "name": "Overview",
+        "text": "Before you chase, make sure the foundation is solid: a written due date, a single clear amount, a sent receipt, and a planned reminder cadence. Then reminders become a system, not a panic. Dunner slots into the cadence step."
+      }
+    ]
+  },
+  {
+    "name": "Friendly vs firm vs final: which reminder tone works when",
+    "steps": [
+      {
+        "name": "Overview",
+        "text": "Friendly works at 0–14 days overdue and protects the relationship. Firm works at 15–30 days when a clear boundary is needed. Final is the last step before late fees. Match the tone to the days overdue rather than jumping straight to final."
+      }
+    ]
+  }
+] as { name: string; steps: { name: string; text: string }[] }[]
+
+export default function BlogPage() {
+  return (
+    <Layout>
+      <Head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(buildFaqJsonLd(faqs)) }}
+        />
+        {howToBlocks.map((block, i) => (
+          <script
+            key={`howto-${i}`}
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify(buildHowToJsonLd(block.name, block.steps)),
+            }}
+          />
+        ))}
+
+        <title>{`${PRODUCT.name} — Blog`}</title>
+        <meta name="description" content="Definitional and how-to posts on invoice reminder emails, late-payment follow-up, reminder tone, and freelance cash flow — the questions freelancers ask before they chase a late invoice." />
+      </Head>
+      <div className="max-w-3xl">
+        <div className="text-xs font-bold tracking-widest uppercase text-indigo-600 mb-3">Blog · GEO</div>
+        <h1 className="text-4xl font-extrabold tracking-tight mb-4">Chasing late invoices, explained</h1>
+        <p className="text-lg text-slate-600 mb-10">Own the definitional queries freelancers ask before they send the nth "just checking in" email.</p>
+
+        <div className="space-y-8">
+          {posts.map((p) => (
+            <article key={p.slug} className="border-b border-slate-200 pb-8">
+              <div className="text-xs font-semibold text-indigo-600 mb-1">{p.type}</div>
+              <h2 className="text-2xl font-bold mb-2 text-slate-900">{p.title}</h2>
+              <p className="text-sm text-slate-600 mb-2"><span className="font-semibold">Target query:</span> {p.query}</p>
+              <p className="text-slate-700 leading-relaxed">{p.body}</p>
+              <p className="text-xs text-slate-400 mt-3">refs: {p.refs.join(' · ')}</p>
+            </article>
+          ))}
+        </div>
+
+        <h2 className="text-2xl font-bold mt-14 mb-2 text-slate-900">Deep-dives (GEO)</h2>
+        <p className="text-sm text-slate-500 mb-6">Long-form, cited explainers. Each carries authoritative small-business / freelance references and an honesty disclaimer.</p>
+        <div className="space-y-5">
+          {geoPosts.map((p) => (
+            <div key={p.slug} className="border-b border-slate-200 pb-5">
+              <h3 className="text-xl font-semibold">
+                <a href={`/blog/${p.slug}`} className="text-indigo-700 hover:underline">{p.title}</a>
+              </h3>
+              <p className="text-sm text-slate-600 mt-1">{p.description}</p>
+            </div>
+          ))}
+        </div>
+
+        <p className="text-xs text-slate-400 mt-8">Publish + syndicate per gtm-launch (IH + GEO indexes). Each post carries authoritative refs.</p>
+      </div>
+    </Layout>
+  )
+}
